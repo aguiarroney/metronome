@@ -1,27 +1,43 @@
 #bpm_div{
 	margin: 15px;
+	padding: 15px;
 	text-align: center;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.19);
 }
 
 #title_div{
-	margin: 15px;
 	text-align: center;
 }
 
 #btn_div{
-	margin: 15px;
+
 	text-align: center;
+}
+
+.button{
+	/*text editing*/
+	font-family:'Roboto',sans-serif;
+	text-align:center;
+	text-decoration:none;
+	color:#FFFFFF;	
+	/*button color*/
+	background-color: #6200EE;
+	/*button shape*/
+	border: none;
+	padding:0.3em 1.2em;
+	margin:0 0.3em 0.3em 0;
+	border-radius:2em;
 }
 
 body{
 	height:300px; 
 	width:200px;
-}
+} 
 
 h3{
 	margin: 0 auto;
 	padding: 0;
-	font-family: verdana;
+	font-family:'Roboto',sans-serif;
 	font-size: 10px;
 	font-weight: normal;
 	display: block;
@@ -30,7 +46,7 @@ h3{
 h1{
 	margin: 0 auto;
 	padding: 0;
-	font-family: verdana;
+	font-family:'Roboto',sans-serif;
 	font-size: 20px;
 	font-weight: bold;
 	display: block;

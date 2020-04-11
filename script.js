@@ -24,20 +24,12 @@ document.addEventListener("DOMContentLoaded", function(){
 
 	//called by the listener when button pressed
 	function subtract(){
-		clearInterval(timer); // stops audio in case it's playing
-		if(getButtonName() == "pause")
-			changeButtonName();
-
 		let speed = document.querySelector('#speed').innerHTML;
 		if(speed > 1)
 			document.querySelector('#speed').innerHTML = parseInt(speed) -1;
 	}
 	//called by the listener when button pressed
 	function increase(){
-		clearInterval(timer); // stops audio in case it's playing
-		if(getButtonName() == "pause")
-			changeButtonName();
-		
 		let speed = document.querySelector('#speed').innerHTML;
 		document.querySelector('#speed').innerHTML = parseInt(speed) + 1;
 	}
