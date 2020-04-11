@@ -1,0 +1,10 @@
+{
+	"name":"Easy Metronome",
+	"version":"1.0",
+	"description":"A simple metronome for musicians",
+	"browser_action":{
+		"default_popup":"index.html"
+	},
+
+	"manifest_version":2
+}
