@@ -24,20 +24,12 @@ document.addEventListener("DOMContentLoaded", function(){
 
 	//called by the listener when button pressed
 	function subtract(){
-		clearInterval(timer); // stops audio in case it's playing
-		if(getButtonName() == "pause")
-			changeButtonName();
-
 		let speed = document.querySelector('#speed').innerHTML;
 		if(speed > 1)
 			document.querySelector('#speed').innerHTML = parseInt(speed) -1;
 	}
 	//called by the listener when button pressed
 	function increase(){
-		clearInterval(timer); // stops audio in case it's playing
-		if(getButtonName() == "pause")
-			changeButtonName();
-		
 		let speed = document.querySelector('#speed').innerHTML;
 		document.querySelector('#speed').innerHTML = parseInt(speed) + 1;
 	}
@@ -54,19 +46,59 @@ document.addEventListener("DOMContentLoaded", function(){
 
 	function stop(){
 		changeButtonName();
+
+		document.getElementById("led_1").style.color = "black";
+		document.getElementById("led_1").style.backgroundColor = "#b6ead4";
+		document.getElementById("led_1").style.boxShadow = "0 0 0";
+
+		document.getElementById("led_2").style.color = "black";
+		document.getElementById("led_2").style.backgroundColor = "#b6ead4";
+		document.getElementById("led_2").style.boxShadow = "0 0 0";
+
 		clearInterval(timer);
 	}
 
 	//called when play_btn is pressed
 	function start(){
+		this.counter = 0;
+		this.audio_id = ["#sound_high", "#sound_low"];
+
 		changeButtonName();
 		var speed = parseInt(document.querySelector('#speed').innerHTML);
 		var ms = 60000;
 		var interval = ms / speed;
 
+		function getCounter(){
+			return (this.counter++)%2;
+		}
+
+		function changeLedColor(counter){
+			if(counter == 0){
+				document.getElementById("led_1").style.color = "white";
+				document.getElementById("led_1").style.backgroundColor = "#00ea00";
+				document.getElementById("led_1").style.boxShadow = "1px 1px 3px green";
+
+				document.getElementById("led_2").style.color = "black";
+				document.getElementById("led_2").style.backgroundColor = "#b6ead4";
+				document.getElementById("led_2").style.boxShadow = "0 0 0";
+
+			}
+			else{
+				document.getElementById("led_2").style.color = "white";
+				document.getElementById("led_2").style.backgroundColor = "#00ea00";
+				document.getElementById("led_2").style.boxShadow = "1px 1px 3px green";
+
+				document.getElementById("led_1").style.color = "black";
+				document.getElementById("led_1").style.backgroundColor = "#b6ead4";
+				document.getElementById("led_1").style.boxShadow = "0 0 0";
+			}
+		}
+
 		function player(){
-			var audio = document.querySelector('#sound_low');
+			var counter = getCounter();
+			var audio = document.querySelector(audio_id[counter]);
 			audio.play();
+			changeLedColor(counter);
 			audio.currentTime = 0;
 		} 
 
