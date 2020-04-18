@@ -1,6 +1,6 @@
 {
 	"name":"Easy Metronome",
-	"version":"v2.0",
+	"version":"2.1",
 	"description":"A simple metronome for musicians",
 	"browser_action":{
 		"default_icon": "utils/icon_default.png",

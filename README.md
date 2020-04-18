@@ -1,6 +1,12 @@
 # metronome
 A simple metronome as a google chrome extension
 ###############################################################
+Version: v2.1
+Tag: emetronome_2_1
+Date: 18-04-2020
+Changes:
+- Bugfix: setting the limit speed at the button functions.
+###############################################################
 Version: v2.0
 Tag: emetronome_2_0
 Date: 18-04-2020

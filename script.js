@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	function subtract(){
 		let speed = document.querySelector('#speed').innerHTML;
 		interrupt();
-		if(speed > 1){
+		if(speed > 40){
 			document.querySelector('#speed').innerHTML = parseInt(speed) -1;
 			//update the slider value
 			document.getElementById("slide_id").value = parseInt(speed) - 1;
@@ -46,9 +46,11 @@ document.addEventListener("DOMContentLoaded", function(){
 	function increase(){
 		interrupt();
 		let speed = document.querySelector('#speed').innerHTML;
-		document.querySelector('#speed').innerHTML = parseInt(speed) + 1;
-		//update the slider value
-		document.getElementById("slide_id").value = parseInt(speed) + 1;
+		if(speed < 300){
+			document.querySelector('#speed').innerHTML = parseInt(speed) + 1;
+			//update the slider value
+			document.getElementById("slide_id").value = parseInt(speed) + 1;
+		}
 	}
 
 	function direction(){
