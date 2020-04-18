@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	document.querySelector('#minus_btn').addEventListener('click', subtract, false)
 	document.querySelector('#plus_btn').addEventListener('click', increase, false)
 	document.querySelector('#play_btn').addEventListener('click', direction , false)
+	document.querySelector('#slide_id').addEventListener('mousemove', updateSpeed ,false)
 
 	console.log("DOM completamente carregado e analisado");
 
@@ -22,16 +23,32 @@ document.addEventListener("DOMContentLoaded", function(){
 			document.querySelector('#play_btn').innerHTML = "Play";
 	}
 
+	function interrupt(){
+		if(getButtonName() == "pause"){
+			changeButtonName();
+			turnOffLeds();
+			clearInterval(timer);
+		}
+	}
+
 	//called by the listener when button pressed
 	function subtract(){
 		let speed = document.querySelector('#speed').innerHTML;
-		if(speed > 1)
+		interrupt();
+		if(speed > 1){
 			document.querySelector('#speed').innerHTML = parseInt(speed) -1;
+			//update the slider value
+			document.getElementById("slide_id").value = parseInt(speed) - 1;
+		}
+
 	}
 	//called by the listener when button pressed
 	function increase(){
+		interrupt();
 		let speed = document.querySelector('#speed').innerHTML;
 		document.querySelector('#speed').innerHTML = parseInt(speed) + 1;
+		//update the slider value
+		document.getElementById("slide_id").value = parseInt(speed) + 1;
 	}
 
 	function direction(){
@@ -44,9 +61,7 @@ document.addEventListener("DOMContentLoaded", function(){
 			stop()
 	}
 
-	function stop(){
-		changeButtonName();
-
+	function turnOffLeds(){
 		document.getElementById("led_1").style.color = "black";
 		document.getElementById("led_1").style.backgroundColor = "#b6ead4";
 		document.getElementById("led_1").style.boxShadow = "0 0 0";
@@ -55,6 +70,31 @@ document.addEventListener("DOMContentLoaded", function(){
 		document.getElementById("led_2").style.backgroundColor = "#b6ead4";
 		document.getElementById("led_2").style.boxShadow = "0 0 0";
 
+	}
+
+	function turnOnLed1(){
+		document.getElementById("led_1").style.color = "white";
+		document.getElementById("led_1").style.backgroundColor = "#00ea00";
+		document.getElementById("led_1").style.boxShadow = "1px 1px 3px green";
+
+		document.getElementById("led_2").style.color = "black";
+		document.getElementById("led_2").style.backgroundColor = "#b6ead4";
+		document.getElementById("led_2").style.boxShadow = "0 0 0";
+	}
+
+	function turnOnLed2(){
+		document.getElementById("led_2").style.color = "white";
+		document.getElementById("led_2").style.backgroundColor = "#00ea00";
+		document.getElementById("led_2").style.boxShadow = "1px 1px 3px green";
+
+		document.getElementById("led_1").style.color = "black";
+		document.getElementById("led_1").style.backgroundColor = "#b6ead4";
+		document.getElementById("led_1").style.boxShadow = "0 0 0";
+	}
+
+	function stop(){
+		changeButtonName();
+		turnOffLeds()
 		clearInterval(timer);
 	}
 
@@ -68,29 +108,18 @@ document.addEventListener("DOMContentLoaded", function(){
 		var ms = 60000;
 		var interval = ms / speed;
 
+		//returns 0 or 1 for
 		function getCounter(){
 			return (this.counter++)%2;
 		}
 
+		//called for changing led style
 		function changeLedColor(counter){
 			if(counter == 0){
-				document.getElementById("led_1").style.color = "white";
-				document.getElementById("led_1").style.backgroundColor = "#00ea00";
-				document.getElementById("led_1").style.boxShadow = "1px 1px 3px green";
+				turnOnLed1();
 
-				document.getElementById("led_2").style.color = "black";
-				document.getElementById("led_2").style.backgroundColor = "#b6ead4";
-				document.getElementById("led_2").style.boxShadow = "0 0 0";
-
-			}
-			else{
-				document.getElementById("led_2").style.color = "white";
-				document.getElementById("led_2").style.backgroundColor = "#00ea00";
-				document.getElementById("led_2").style.boxShadow = "1px 1px 3px green";
-
-				document.getElementById("led_1").style.color = "black";
-				document.getElementById("led_1").style.backgroundColor = "#b6ead4";
-				document.getElementById("led_1").style.boxShadow = "0 0 0";
+			} else{
+				turnOnLed2();
 			}
 		}
 
@@ -102,8 +131,23 @@ document.addEventListener("DOMContentLoaded", function(){
 			audio.currentTime = 0;
 		} 
 
+		// starts the loop
 		timer = setInterval(player, interval);
 		
+	}
+
+	//function called when the slider is moved
+	function updateSpeed(){
+		var initialSpeed = document.querySelector('#speed').innerHTML;
+		var sliderValue = document.getElementById("slide_id").value;
+
+		//condition to avoid unexpected behavior in case of mouser hover without changing
+		if(initialSpeed != sliderValue){
+
+			document.querySelector('#speed').innerHTML = sliderValue;
+			var buttonStatus = getButtonName();
+			interrupt();
+		}
 	}
 
 },false)
