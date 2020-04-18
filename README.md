@@ -1,7 +1,7 @@
 # metronome
 A simple metronome as a google chrome extension
 ###############################################################
-Version 2.0
+Version: v2.0
 Tag: emetronome_2_0
 Date: 18-04-2020
 Changes:
