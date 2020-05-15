@@ -1,6 +1,12 @@
 # metronome
 A simple metronome as a google chrome extension
 ###############################################################
+Version: v2.2
+Tag: emetronome_2_2
+Date: 15-05-2020
+Changes:
+- Changing the click sound
+###############################################################
 Version: v2.1
 Tag: emetronome_2_1
 Date: 18-04-2020
